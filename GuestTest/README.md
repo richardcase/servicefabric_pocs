@@ -11,10 +11,11 @@ Copy-ServiceFabricApplicationPackage -ApplicationPackagePath SFGuestTest.WebAPIT
 Register-ServiceFabricApplicationType -ApplicationPathInImageStore "SFGuestTest\_V2"
 
 # Start upgrade
-Start-ServiceFabricApplicationUpgrade -ApplicationName fabric:/SFGuestTest.SFHost -ApplicationTypeVersion 2.0.0 -HealthCheckStableDurationSec 60 -UpgradeDomainTimeoutSec 1200 -UpgradeTimeout 1320   -FailureAction Rollback -Monitored -Force
-
 Start-ServiceFabricApplicationUpgrade -ApplicationName fabric:/SFGuestTest.SFHost -ApplicationTypeVersion 2.0.0 -FailureAction Rollback -UpgradeReplicaSetCheckTimeout 1  -Monitored -Force
 
 
 # Get status of upgrade
 Get-ServiceFabricApplicationUpgrade fabric:/SFGuestTest.SFHost
+
+
+Start-ServiceFabricApplicationUpgrade -ApplicationName fabric:/SFGuestTest.SFHost -UpgradeMode Invalid
