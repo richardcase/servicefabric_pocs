@@ -1,20 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ApplicationManifest ApplicationTypeName="SFGuestTest.SFHostType"
-                     ApplicationTypeVersion="1.0.0"
+                     ApplicationTypeVersion="2.0.0"
                      xmlns="http://schemas.microsoft.com/2011/01/fabric"
                      xmlns:xsd="http://www.w3.org/2001/XMLSchema"
                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Parameters>
     <Parameter Name="SFGuestTest.WebAPI_InstanceCount" DefaultValue="-1" />
+    <Parameter Name="SFGuestTest_WebAPIPkg_Environment" DefaultValue="Release" />
+    <Parameter Name="SFGuestTest_WebAPIPkg_URLS" DefaultValue="http://*:5000" /> 
   </Parameters>
   <!-- Import the ServiceManifest from the ServicePackage. The ServiceManifestName and ServiceManifestVersion 
        should match the Name and Version attributes of the ServiceManifest element defined in the 
        ServiceManifest.xml file. -->
   <ServiceManifestImport>
-    <ServiceManifestRef ServiceManifestName="SFGuestTest.WebAPIPkg" ServiceManifestVersion="1.0.0" />
+    <ServiceManifestRef ServiceManifestName="SFGuestTest.WebAPIPkg" ServiceManifestVersion="2.0.0" />
     <ConfigOverrides />
     <EnvironmentOverrides CodePackageRef="Code">
-      <EnvironmentVariable Name="ASPNETCORE_ENVIRONMENT" Value="Release"/>
+      <EnvironmentVariable Name="ASPNETCORE_URLS" Value="[SFGuestTest_WebAPIPkg_URLS]"/>
+      <EnvironmentVariable Name="ASPNETCORE_ENVIRONMENT" Value="[SFGuestTest_WebAPIPkg_Environment]"/>  
     </EnvironmentOverrides>
   </ServiceManifestImport>
   <DefaultServices>
